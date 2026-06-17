@@ -5,7 +5,7 @@ async function post(endpoint, body) {
   const response = await fetch(BASE_URL + endpoint, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body)
+    body: JSON.stringify(body),
   });
 
   const data = await response.json();
@@ -41,7 +41,9 @@ export function getCodes(country) {
 }
 
 export async function getLatestRates(baseCurrency) {
-  const response = await fetch(EXCHANGE_URL + "/latest?base=" + encodeURIComponent(baseCurrency));
+  const response = await fetch(
+    EXCHANGE_URL + "/latest?base=" + encodeURIComponent(baseCurrency),
+  );
   if (!response.ok) {
     throw new Error("Exchange rate error");
   }
@@ -64,6 +66,6 @@ export async function getCountryInfo(country) {
     flag,
     currency,
     capital,
-    codes
+    codes,
   };
 }

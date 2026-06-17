@@ -11,7 +11,9 @@ async function loadCurrencies() {
   const data = await getLatestRates("USD");
   const currencies = Object.keys(data.rates || {});
 
-  const options = currencies.map(currency => `<option value="${currency}">${currency}</option>`).join("");
+  const options = currencies
+    .map((currency) => `<option value="${currency}">${currency}</option>`)
+    .join("");
 
   fromSelect.innerHTML = options;
   toSelect.innerHTML = options;

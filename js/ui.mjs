@@ -25,13 +25,13 @@ export function renderCountry(data) {
         <div>
           <h3>States / Provinces</h3>
           <ul>
-            ${states.length ? states.map(s => `<li>${s.name}</li>`).join("") : "<li>N/A</li>"}
+            ${states.length ? states.map((s) => `<li>${s.name}</li>`).join("") : "<li>N/A</li>"}
           </ul>
         </div>
         <div>
           <h3>Cities (top 10)</h3>
           <ul>
-            ${cities.length ? cities.map(c => `<li>${c}</li>`).join("") : "<li>N/A</li>"}
+            ${cities.length ? cities.map((c) => `<li>${c}</li>`).join("") : "<li>N/A</li>"}
           </ul>
         </div>
       </div>

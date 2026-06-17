@@ -1,48 +1,43 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Country Details</title>
 
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css" />
 
     <!-- IMPORT CORRETO DA PÁGINA -->
     <script type="module" src="js/country.mjs" defer></script>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <div id="header"></div>
 
     <main>
+      <section class="about">
+        <div class="container">
+          <h2 class="section-title">Country Details</h2>
 
-        <section class="about">
-            <div class="container">
+          <!-- INPUT + BUTTON (OBRIGATÓRIO PARA BUSCA) -->
+          <div class="search-box">
+            <input
+              id="countryInput"
+              type="text"
+              placeholder="Search country..."
+            />
+            <button id="searchBtn">Search</button>
+          </div>
 
-                <h2 class="section-title">
-                    Country Details
-                </h2>
-
-                <!-- INPUT + BUTTON (OBRIGATÓRIO PARA BUSCA) -->
-                <div class="search-box">
-                    <input id="countryInput" type="text" placeholder="Search country..." />
-                    <button id="searchBtn">Search</button>
-                </div>
-
-                <!-- RESULTADO RENDERIZADO VIA TEMPLATE LITERAL -->
-                <div id="countryDetails"></div>
-
-            </div>
-        </section>
-
+          <!-- RESULTADO RENDERIZADO VIA TEMPLATE LITERAL -->
+          <div id="countryDetails"></div>
+        </div>
+      </section>
     </main>
 
     <div id="footer"></div>
 
     <script type="module" src="js/layout-loader.mjs"></script>
-</body>
-
+  </body>
 </html>

@@ -95,7 +95,9 @@ header .container {
   border-radius: var(--radius);
   font-size: 1rem;
   outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .search-box input:focus {
@@ -110,7 +112,9 @@ header .container {
   color: var(--light);
   border-radius: var(--radius);
   cursor: pointer;
-  transition: transform 0.2s ease, background-color 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease;
 }
 
 #searchBtn:hover,
