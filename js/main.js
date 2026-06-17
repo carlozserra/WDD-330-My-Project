@@ -1,24 +1,49 @@
-﻿import { getLatestRates } from "./api.mjs";
+﻿import { getCurrencyRates } from "./api.mjs";
 import { convertCurrency } from "./converter.mjs";
 
-const amountInput = document.querySelector("#amount");
-const fromSelect = document.querySelector("#fromCurrency");
-const toSelect = document.querySelector("#toCurrency");
-const result = document.querySelector("#result");
-const button = document.querySelector("#convertBtn");
+const amountInput = document.getElementById("amount");
+const fromSelect = document.getElementById("fromCurrency");
+const toSelect = document.getElementById("toCurrency");
+const result = document.getElementById("result");
+const button = document.getElementById("convertBtn");
 
-async function loadCurrencies() {
-  const data = await getLatestRates("USD");
-  const currencies = Object.keys(data.rates || {});
-
-  const options = currencies
-    .map((currency) => `<option value="${currency}">${currency}</option>`)
-    .join("");
+function fillCurrencyOptions(currencies) {
+  var options = "";
+  for (var i = 0; i < currencies.length; i++) {
+    options += '<option value="' + currencies[i] + '">' + currencies[i] + '</option>';
+  }
 
   fromSelect.innerHTML = options;
   toSelect.innerHTML = options;
   fromSelect.value = "USD";
   toSelect.value = "BRL";
+}
+
+async function loadCurrencies() {
+  try {
+    const data = await getCurrencyRates("USD");
+    let options = "";
+
+    // Use the response data directly to build option elements
+    if (data && data.data) {
+      for (var code in data.data) {
+        options += '<option value="' + code + '">' + code + '</option>';
+      }
+    }
+
+    if (!options) {
+      result.textContent = "Could not load currency list.";
+      return;
+    }
+
+    fromSelect.innerHTML = options;
+    toSelect.innerHTML = options;
+    fromSelect.value = "USD";
+    toSelect.value = "BRL";
+  } catch (err) {
+    console.error("Currency load failed", err);
+    result.textContent = "Could not load currency list.";
+  }
 }
 
 loadCurrencies();

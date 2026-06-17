@@ -69,3 +69,33 @@ export async function getCountryInfo(country) {
     codes,
   };
 }
+
+const API_KEY = "cur_live_t07wAJmRCoAAbm0eBGn5pBpMjLRV1z0nssoNwzX1";
+
+export async function getRates(base = "USD") {
+  const response = await fetch(
+    `https://api.currencyapi.com/v3/latest?apikey=${API_KEY}&base_currency=${base}`
+  );
+
+  if (!response.ok) {
+    throw new Error("Currency API error");
+  }
+
+  const data = await response.json();
+  return data;
+}
+
+export function parseRates(data) {
+  if (!data) return {};
+  if (data.rates) {
+    return data.rates;
+  }
+
+  if (data.data && typeof data.data === "object") {
+    return Object.fromEntries(
+      Object.entries(data.data).map(([code, value]) => [code, value?.value ?? 0]),
+    );
+  }
+
+  return {};
+}

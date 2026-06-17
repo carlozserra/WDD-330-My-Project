@@ -1,8 +1,9 @@
-import { getLatestRates } from "./api.mjs";
+import { getRates, parseRates } from "./api.mjs";
 
 export async function convertCurrency(from, to, amount) {
-  const data = await getLatestRates(from);
-  const rate = data && data.rates ? data.rates[to] : null;
+  const data = await getRates(from);
+  const rates = parseRates(data);
+  const rate = rates[to];
 
   if (!rate) {
     throw new Error("Exchange rate not available");

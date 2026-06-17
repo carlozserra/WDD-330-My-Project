@@ -1,4 +1,4 @@
-﻿import { getLatestRates } from "./api.mjs";
+﻿import { getRates, parseRates } from "./api.mjs";
 import { convertCurrency } from "./converter.mjs";
 
 const amountInput = document.querySelector("#amount");
@@ -8,8 +8,9 @@ const result = document.querySelector("#result");
 const button = document.querySelector("#convertBtn");
 
 async function loadCurrencies() {
-  const data = await getLatestRates("USD");
-  const currencies = Object.keys(data.rates || {});
+  const data = await getRates("USD");
+  const rates = parseRates(data);
+  const currencies = Object.keys(rates);
 
   const options = currencies
     .map((currency) => `<option value="${currency}">${currency}</option>`)

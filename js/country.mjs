@@ -1,24 +1,39 @@
 import { getCountryInfo } from "./api.mjs";
 import { renderCountry } from "./ui.mjs";
+import { saveCountry, getSavedCountry } from "./storage.mjs";
 
-const input = document.querySelector("#countryInput");
-const button = document.querySelector("#searchBtn");
-const output = document.querySelector("#countryDetails");
+var input = document.getElementById("countryInput");
+var button = document.getElementById("searchBtn");
+var output = document.getElementById("countryDetails");
 
-button.addEventListener("click", async () => {
-  const country = input.value.trim();
+async function requestCountry(country) {
+  return getCountryInfo(country);
+}
+
+async function showCountry(country) {
+  output.textContent = "Loading...";
+  const data = await requestCountry(country);
+  output.innerHTML = renderCountry(data);
+  saveCountry({ term: country, result: data });
+}
+
+button.addEventListener("click", async function () {
+  var country = input.value.trim();
   if (!country) {
     output.textContent = "Type a country name.";
     return;
   }
 
-  output.textContent = "Loading...";
-
   try {
-    const data = await getCountryInfo(country);
-    output.innerHTML = renderCountry(data);
+    await showCountry(country);
   } catch (err) {
     console.error(err);
     output.textContent = "Country not found or API error.";
   }
 });
+
+var saved = getSavedCountry();
+if (saved && saved.term) {
+  input.value = saved.term;
+  showCountry(saved.term);
+}
