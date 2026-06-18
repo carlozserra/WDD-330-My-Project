@@ -230,3 +230,24 @@ footer {
   text-align: center;
   padding: 25px;
 }
+
+@media (max-width: 900px) {
+  .feature-grid { grid-template-columns: repeat(2, 1fr); }
+  .hero h2 { font-size: 2rem; }
+}
+
+@media (max-width: 768px) {
+  .hero-content { flex-direction: column; gap: 20px; }
+  .hero h2 { font-size: 1.75rem; }
+  .hero { padding: 40px 0; }
+  .menu { gap: 12px; flex-wrap: wrap; }
+  .search-box input { min-width: 0; }
+  .feature-grid { grid-template-columns: 1fr; }
+  .country-card-detail .country-lists { flex-direction: column; }
+}
+
+@media (max-width: 480px) {
+  .hero h2 { font-size: 1.5rem; }
+  #searchBtn, #currencyBtn { padding: 10px 14px; }
+  .logo { font-size: 1rem; }
+}
